@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #222;
+  height: 50px;
+  width: 100vw;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 2.5em;
+  font-family: 'Shadows Into Light', cursive;
+  text-align: start;
+}
+
+.favorites-bar{
+  height: 40vh;
+  background: peachpuff;
+  font-family: 'Shadows Into Light', cursive;
+  text-align: center;
+  font-size: 1.5em;
+}
