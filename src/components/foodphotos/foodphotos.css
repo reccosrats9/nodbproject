@@ -13,3 +13,9 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .image-display{
+    font-family: 'Shadows Into Light', cursive;
+    text-align: center;
+    font-size: 1em;
+  }

@@ -19,9 +19,17 @@
 }
 
 .favorites-bar{
-  height: 40vh;
+  /* height: 40vh; */
+  width: 100vw;
   background: peachpuff;
   font-family: 'Shadows Into Light', cursive;
-  text-align: center;
-  font-size: 1.5em;
+  /* text-align: center; */
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+Goals{
+  display: flex;
 }

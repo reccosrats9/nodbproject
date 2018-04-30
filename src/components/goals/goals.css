@@ -1,0 +1,24 @@
+.pic-goal-form-parent{
+    /* background: blue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.pic-goal-form{
+    /* background: purple; */
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+input{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+list{
+    width: 200px;
+}

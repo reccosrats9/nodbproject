@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import "./foodphotos.css";
 
-export default class Foodphotos extends Component{
+export default class Foodphotos extends Component {
     constructor() {
         super()
         this.state = {
             pics: [],
             faves: []
         }
-        this.addToFavorites= this.addToFavorites.bind(this)
     }
 
     componentDidMount() {
@@ -20,46 +19,46 @@ export default class Foodphotos extends Component{
         })
     }
 
-    addToFavorites(){
-        let newFaves= this.state.faves.slice()
-        let fullImage= this.state.pics.map(pic=>pic.urls.thumb)
-        let id= this.state.pics.map(pic=>pic.id)
-        newFaves.push(fullImage)
-        this.setState({faves: newFaves})
+    addToFavorites(pic) {
+        if (this.state.faves.find(img => img == pic)) {
+            return;
+        }
+        
+        axios.post('/api/mygoals',
+        {
+            img: pic
+        }
+    ).then(
+        res => { this.setState({ faves: res.data }) 
+        this.props.updateFaves(res.data)}
+        )
     }
-    // pics.map( pic => {
-    //     let completeImage = pic.urls.thumb
 
     render() {
         const { pics, faves } = this.state;
-        console.log(pics)
+        // console.log(pics)
+        let myNewFavorite = pics.filter((pic, ind, arr, ) => {
+            (pic === pic.id)
+        })
         return (
-           <div>
-               <div className='faves-div'>
-               <div>
-                    {faves.map((fave, i)=>{
-                        // let faveImage= fave.urls.thumb
-                        return(
+            <div>
+                <div className='faves-div'> </div>
+                <h1 className="image-display" >Click an image to add it to your goals list</h1>
+                <div className='center-div'>
+                    {pics.map((pic, index) => {
+                        let shownImage = pic.urls.thumb
+                        let imageID = pic.id
+
+                        return (
                             <div>
-                                <img src={fave[i]}/>
+                                <img src={shownImage} onClick={() => this.addToFavorites(pic)} />
+                                {/* <Button id={pic.id} picURL={shownImage} updateFavesFn={this.addToFavorites} /> */}
+                                {/* <button onClick= {this.addToFavorites}>♥</button> */}
                             </div>
                         )
-                    })
+                    })}
 
-                    }
                 </div>
-               </div>
-           <div className='center-div'>
-                {pics.map( pic => {
-                    let completeImage = pic.urls.thumb
-                    return (
-                        <div>
-                            <img src={completeImage} />
-                            <button onClick= {this.addToFavorites}>♥</button> 
-                        </div>
-                    )
-                })}
-            </div>
             </div>
         )
     }
