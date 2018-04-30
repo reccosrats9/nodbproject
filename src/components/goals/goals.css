@@ -1,7 +1,7 @@
 .pic-goal-form-parent{
     /* background: blue; */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
 
@@ -19,6 +19,13 @@ input{
     flex-wrap: wrap;
 }
 
-list{
+.goals-list{
+    /* display: flex;  */
     width: 200px;
+
+}
+
+.goals-list li{
+    flex-direction: column;
+    flex-wrap: wrap;
 }

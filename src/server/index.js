@@ -45,6 +45,10 @@ app.get('/api/photolibrary', (req,res)=>{
     res.status(200).send(photoLibrary)
 })
 
+app.get('/api/mygoals', (req,res)=>{
+    res.status(200).send(myGoals)
+})
+
 app.post('/api/mygoals', (req,res)=>{
     // console.log('goal:', req.body.goal)
     const image = myGoals.find(img=> img.id ==req.body.id);
@@ -58,6 +62,15 @@ app.post('/api/mygoals', (req,res)=>{
     // console.log('post-if', image)
     // console.log('post-if', myGoals)
 
+    res.status(200).send(myGoals)
+})
+
+app.put(`/api/mygoals/:picIndex`, (req,res)=>{
+    console.log(req.params);
+    console.log(req.body, 'body')
+    const {picIndex}=req.params
+    const {goalIndex, editedGoalString}= req.body
+    myGoals[picIndex].goals[goalIndex]= editedGoalString
     res.status(200).send(myGoals)
 })
 

@@ -1,8 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
-App{
-  background: whitesmoke;
-}
-
 .App {
   text-align: center;
 }
@@ -36,4 +32,10 @@ App{
 
 Goals{
   display: flex;
+}
+
+
+.edit-goal-bar{
+  width: 35vw;
+  margin-left: 32.5vw;
 }

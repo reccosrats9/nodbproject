@@ -14,10 +14,14 @@ class App extends Component {
     this.state = {
       myFavorites: [],
       // myGoals: []
+      editedGoalString:''
     }
     this.updateFaves= this.updateFaves.bind(this);
     this.updateGoals= this.updateGoals.bind(this);
     this.deleteFavorite=this.deleteFavorite.bind(this);
+    this.editGoal= this.editGoal.bind(this);
+    this.editGoalString= this.editGoalString.bind(this);
+
   }
 
   // createGoal() {
@@ -25,6 +29,14 @@ class App extends Component {
   //     this.setState({ myGoals: res })
   //   })
   // }
+
+  componentDidMount(){
+    axios.get('/api/mygoals').then((res)=>{
+      console.log(res.data)
+      this.setState({myFavorites:res.data
+      })}
+    )
+  }
 
   updateFaves(faves){
     this.setState({myFavorites:faves})
@@ -43,10 +55,23 @@ class App extends Component {
   deleteFavorite(imgid){
     axios.delete(`api/mygoals/${imgid}`).then(
     res=> {
-      console.log(res.data);
+      // console.log(res.data);
       this.setState({myFavorites: res.data})
     }
 )
+}
+
+editGoal(picIndex, goalIndex){
+  // let goalVal= this.state.myFavorites[picIndex].goals[goalIndex]
+  let {editedGoalString}= this.state
+  axios.put(`api/mygoals/${picIndex}`, {editedGoalString, goalIndex}).then(res=>{
+    console.log(res.data)
+    this.setState({myFavorites:res.data , editedGoalString:''})
+  }).catch(()=>console.log('failed, app js edit goal'))
+}
+
+editGoalString(e){
+  this.setState({editedGoalString:e.target.value})
 }
 
   render() {
@@ -55,7 +80,8 @@ class App extends Component {
         <Header/>
         <div className='favorites-bar'>
           <Miniheader/>
-          <Goals faves={this.state.myFavorites} updateGoals={this.updateGoals} deleteFavorite={this.deleteFavorite}/>
+          <input className='edit-goal-bar' onChange={this.editGoalString}    value={this.state.editedGoalString} placeholder='Edit goals here'/>
+          <Goals faves={this.state.myFavorites} updateGoals={this.updateGoals} deleteFavorite={this.deleteFavorite} editGoal={this.editGoal} editedString={this.state.editedGoalString}/>
         </div>
 
         <Foodphotos updateFaves={this.updateFaves}/>
